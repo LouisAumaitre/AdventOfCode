@@ -17,6 +17,7 @@ def find_sum(sub_report, total):
             return None, None
     return index_a, index_b
 
+
 a, b = find_sum(report, 2020)
 
 print('PART 1')
