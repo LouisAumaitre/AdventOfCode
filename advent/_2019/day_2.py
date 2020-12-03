@@ -1,7 +1,7 @@
 import copy
 
 from advent.input_reader import read_single_line_with_separator
-from advent._2019.int_code import run_int_code
+from advent._2019.int_code import run_int_code_basic
 
 computer = read_single_line_with_separator('input/2019/day_2', ',', int)
 
@@ -9,7 +9,7 @@ computer = read_single_line_with_separator('input/2019/day_2', ',', int)
 def run_program(computer, noun, verb):
     computer[1] = noun
     computer[2] = verb
-    run_int_code(computer)
+    run_int_code_basic(computer)
     return computer[0]
 
 
