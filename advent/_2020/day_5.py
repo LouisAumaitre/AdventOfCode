@@ -21,9 +21,7 @@ print(max(seats))
 
 print('PART 2')
 start = min(seats)
-print(seats, start, start + len(seats))
 for i, seat in enumerate(seats):
     if i+start != seat:
         print(seat)
-        start += 1
-        # break
+        break
