@@ -3,19 +3,15 @@ from advent.input_reader import read_list_of_values_with_separators
 code = read_list_of_values_with_separators('input/2020/day_14', (str, str), ' = ')
 
 
-def apply_mask(value, mask):
-    # print('before', value)
-    # print('mask', mask)
+def apply_mask(unmasked_value, mask):
     for i, bit in enumerate(mask):
         expon = pow(2, 35 - i)
         if bit == 'X':
             continue
-        before = value // (expon * 2)
-        after = value % expon
-        value = before * expon * 2 + expon * int(bit) + after
-    # print('after', value)
-    # print()
-    return value
+        before = unmasked_value // (expon * 2)
+        after = unmasked_value % expon
+        unmasked_value = before * expon * 2 + expon * int(bit) + after
+    return unmasked_value
 
 
 mem = {}
@@ -43,20 +39,11 @@ def apply_mask_2(address, mask):
         elif added_value == '0':
             potential_addresses = [p_a * 2 for p_a in potential_addresses]
         else:
-            assert added_value == 'X'
             new_addresses = []
             for p_a in potential_addresses:
                 new_addresses.append(p_a * 2)
                 new_addresses.append(p_a * 2 + 1)
-            assert len(new_addresses) == len(potential_addresses) * 2
             potential_addresses = new_addresses
-    #     if bit == 'X':
-    #         continue
-    #     before = value // (expon * 2)
-    #     after = value % expon
-    #     value = before * expon * 2 + expon * int(bit) + after
-    # print('after', value)
-    # print()
     return potential_addresses
 
 
@@ -71,5 +58,5 @@ for instruction, value in code:
     for address in addresses:
         mem[address] = value
 
-print('Part 1')
+print('Part 2')
 print(sum(mem.values()))
