@@ -1,6 +1,6 @@
 from advent.input_reader import read_list_of_values
 
-cypher = read_list_of_values('input/2020/day_9', int)
+cypher = read_list_of_values('input/2020/day_8', int)
 
 pre = 25
 inv = -1

@@ -35,6 +35,16 @@ def read_map(filename, code: dict):
         return result
 
 
+def read_int_map(filename):
+    # series of lines, with each character representing an int
+    with open(filename) as file:
+        result = [
+            list(map(int, line.replace('\n', '')))
+            for line in file.readlines()
+        ]
+        return result
+
+
 def read_single_line_with_separator(filename, separator, value_type):
     # single line, with values separated by the same character
     with open(filename) as file:
