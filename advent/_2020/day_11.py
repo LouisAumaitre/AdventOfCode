@@ -1,6 +1,6 @@
 from time import time
 
-from advent.input_reader import read_map
+from advent.input_reader import read_translated_map
 
 
 def arrival(seats):
@@ -33,7 +33,7 @@ def count_occupied(setup):
 
 
 print("Part 1")
-setup = read_map('input/2020/day_11', {})
+setup = read_translated_map('input/2020/day_11', {})
 start = time()
 current_setup = to_str(setup)
 setup = arrival(setup)
@@ -86,7 +86,7 @@ def sees_occupied_in_direction(start_x, start_y, x_diff, y_diff, seats):
 
 
 print("Part 2")
-setup = read_map('input/2020/day_11', {})
+setup = read_translated_map('input/2020/day_11', {})
 start = time()
 current_setup = to_str(setup)
 setup = arrival_2(setup)

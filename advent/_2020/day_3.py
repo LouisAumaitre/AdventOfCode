@@ -1,6 +1,6 @@
-from advent.input_reader import read_map
+from advent.input_reader import read_translated_map
 
-local_map = read_map('input/2020/day_3', {'.': 0, '#': 1})
+local_map = read_translated_map('input/2020/day_3', {'.': 0, '#': 1})
 
 
 def how_many_trees(local_slope, start, vertical_value, horizontal_val):

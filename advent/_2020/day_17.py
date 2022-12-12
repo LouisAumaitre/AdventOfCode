@@ -1,8 +1,8 @@
 from copy import copy
 
-from advent.input_reader import read_map
+from advent.input_reader import read_translated_map
 
-cubes = read_map('input/2020/day_17', {'#': True, '.': False})
+cubes = read_translated_map('input/2020/day_17', {'#': True, '.': False})
 
 active_cubes = {
     (x, y, 0) for x, line in enumerate(cubes) for y, cube in enumerate(line) if cube

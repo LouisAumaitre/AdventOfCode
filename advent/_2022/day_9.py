@@ -88,5 +88,4 @@ def whip(input, rope_length):
 
 
 print(f'PART 1: {whip(input, 2)}')  # 6271
-print(f'PART 2: {whip(input, 10)}')  # 6271
-# print_map(map_t)
+print(f'PART 2: {whip(input, 10)}')  # 2458

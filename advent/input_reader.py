@@ -22,7 +22,7 @@ def read_list_of_values_with_separators(filename, value_types, separator):
         return [list(map(lambda ty, val: ty(val), value_types, line.replace('\n', '').split(separator))) for line in file.readlines()]
 
 
-def read_map(filename, code: dict):
+def read_translated_map(filename, code: dict):
     # series of lines, with each character representing a value
     with open(filename) as file:
         result = [
@@ -32,6 +32,16 @@ def read_map(filename, code: dict):
         for i, line in enumerate(result):
             if line[-1] == '\n':
                 result[i] = line[:-1]
+        return result
+
+
+def read_map(filename):
+    # series of lines, with each character representing a value
+    with open(filename) as file:
+        result = [
+            [*line.replace('\n', '')]
+            for line in file.readlines()
+        ]
         return result
 
 
