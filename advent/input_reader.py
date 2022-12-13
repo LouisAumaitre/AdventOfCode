@@ -76,3 +76,14 @@ def read_list_of_strings(filename):
         else:
             list_.append(line[0:-1])
     return list_
+
+
+def read_eval(filename):
+    list_ = []
+    f = open(filename, mode='r')
+    for line in f:
+        if line == '\n':
+            list_.append(None)
+        else:
+            list_.append(eval(line[0:-1]))
+    return list_
