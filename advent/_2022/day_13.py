@@ -39,8 +39,7 @@ def compare(a, b, depth=0):
 total = 0
 for i in range(len(input) // 3):
     # print(f'== Pair {i+1} ==')
-    result = compare(input[i*3], input[i*3+1])
-    if result >= 0:
+    if compare(input[i*3], input[i*3+1]) >= 0:
         total += i + 1
     #     print(f' Current total = {total}')
     # print()
