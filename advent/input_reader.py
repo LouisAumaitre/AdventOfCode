@@ -62,7 +62,7 @@ def read_single_line_with_separator(filename, separator, value_type):
 
 
 def read_lines_with_separator(filename, separator, value_type):
-    # single line, with values separated by the same character
+    # multiple lines, with values separated by the same character
     with open(filename) as file:
         return [list(map(value_type, line.replace('\n', '').split(separator))) for line in file.readlines()]
 
