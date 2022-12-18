@@ -1,5 +1,4 @@
 from copy import copy
-from itertools import permutations
 from time import time
 
 from advent.input_reader import read_lines_with_separator
@@ -13,6 +12,7 @@ class Valve:
         self._leads_to = leads_to
         self.leads_to = []
         self._dist_to: dict['Valve', int] = {}
+        self.forbidden_links = set()
 
     def dist(self, v: 'Valve'):
         return self.__dist(v, set())
@@ -51,6 +51,8 @@ def get_best_path_value(start, remaining_time, remaining_valves: set):
     best_result = 0
     best_path = ''
     for target in remaining_valves:
+        if target in start.forbidden_links:
+            continue
         time = remaining_time - start.dist(target)  # move to valve
         time -= 1  # open valve
         rem_valves = copy(remaining_valves)
@@ -64,9 +66,9 @@ def get_best_path_value(start, remaining_time, remaining_valves: set):
     return best_result, best_path
 
 
-t = time()
-best_option, best_path = get_best_path_value(AA, 30, value_valves)
-print(f'Part 1: {best_option} ({round(time() - t, 1)}s) by doing {best_path}')
+# t = time()
+# best_option, best_path = get_best_path_value(AA, 30, value_valves)
+# print(f'Part 1: {best_option} ({round(time() - t, 1)}s) by doing {best_path}')  # 2119; 9s
 
 
 def get_best_elephant_path_value(start, remaining_time, remaining_valves: set):
@@ -76,7 +78,9 @@ def get_best_elephant_path_value(start, remaining_time, remaining_valves: set):
         return my_score, '//' + my_path
     best_result = 0
     best_path = ''
-    for target in remaining_valves:
+    for i, target in enumerate(remaining_valves):
+        if target in start.forbidden_links:
+            continue
         time = remaining_time - start.dist(target)  # move to valve
         time -= 1  # open valve
         rem_valves = copy(remaining_valves)
@@ -85,9 +89,32 @@ def get_best_elephant_path_value(start, remaining_time, remaining_valves: set):
         if time * target.pressure + result > best_result:
             best_result = time * target.pressure + result
             best_path = '->' + target.name + path
+        if len(remaining_valves) == 15:
+            print(f'-{round(i*100/15)}%-')
+    # or option to stop:
+    if remaining_time < 15:
+        my_score, my_path = get_best_path_value(AA, 26, remaining_valves)
+        if my_score > best_result:
+            return my_score, '//' + my_path
     return best_result, best_path
 
 
+# MANUAL IMPROVEMENTS:
+for v in value_valves:
+    for v_ in value_valves:
+        if v is not v_ and v.dist(v_) > 20:
+            v.forbidden_links.add(v_)
+
+t = time()
+best_option, best_path = get_best_path_value(AA, 30, value_valves)
+print(f'Part 1\': {best_option} ({round(time() - t, 1)}s) by doing {best_path}')  # 2119?; 2.5s
+
 t = time()
 best_option, best_path = get_best_elephant_path_value(AA, 26, value_valves)
-print(f'Part 2: {best_option} ({round(time() - t, 1)}s) by doing {best_path}')
+print(f'Part 2: {best_option} ({round(time() - t, 1)}s) by doing {best_path}')  # 2562/2600+ is wrong
+
+# for v in value_valves:
+#     print(v)
+#     for v_ in value_valves:
+#         if v_ is not v and v.dist(v_) > 20 and v_ not in v.forbidden_links:
+#             print(f'  - {v_} : {v.dist(v_)}')
